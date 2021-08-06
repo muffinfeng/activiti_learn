@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="myProcess_Part1" name="流程定义名称" isExecutable="true">
+    <startEvent id="sid-faf4aaa6-f714-460a-b4d2-e1008d69a2e5"/>
+    <userTask id="sid-a47483b5-1b70-4492-9bbd-0bc05fc5db99" name="UserTask" activiti:assignee="bajie"/>
+    <endEvent id="sid-a9bde0a6-a492-470b-ac69-428ffe0204b3"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_test">
+    <bpmndi:BPMNPlane bpmnElement="myProcess_Part1" id="BPMNPlane_test">
+      <bpmdi:BPMNShape xmlns:bpmdi="http://www.omg.org/spec/BPMN/20100524/DI" id="shape-72b9f00c-1465-40a5-907c-b3fad4506341" bpmnElement="sid-faf4aaa6-f714-460a-b4d2-e1008d69a2e5">
+        <omgdc:Bounds x="-63.5" y="-77.5" width="30.0" height="30.0"/>
+      </bpmdi:BPMNShape>
+      <bpmdi:BPMNShape xmlns:bpmdi="http://www.omg.org/spec/BPMN/20100524/DI" id="shape-09c9d8ae-07bc-4c8c-880c-d6a405ff84fc" bpmnElement="sid-a47483b5-1b70-4492-9bbd-0bc05fc5db99">
+        <omgdc:Bounds x="-65.5" y="-22.0" width="100.0" height="80.0"/>
+      </bpmdi:BPMNShape>
+      <bpmdi:BPMNShape xmlns:bpmdi="http://www.omg.org/spec/BPMN/20100524/DI" id="shape-ac60b8bd-643d-4e06-8d5d-18512c7bc57d" bpmnElement="sid-a9bde0a6-a492-470b-ac69-428ffe0204b3">
+        <omgdc:Bounds x="-50.5" y="89.0" width="30.0" height="30.0"/>
+      </bpmdi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
