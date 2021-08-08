@@ -2,6 +2,8 @@ package com.activiti.demo.utils;
 
 public class GlobalConfig {
 
+    public static boolean TEST = true;
+
     public enum ResponseCode{
         SUCCESS(0,"成功"),
         FAIL(1,"失败");
