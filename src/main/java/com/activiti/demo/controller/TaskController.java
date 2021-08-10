@@ -136,6 +136,7 @@ public class TaskController {
     }
 
     //动态渲染表单
+    //传给前端的数据
     @GetMapping(value = "formDataShow")
     public AjaxResponse formDataShow(@RequestParam("taskID") String taskID){
         if(GlobalConfig.TEST){
@@ -147,6 +148,20 @@ public class TaskController {
             Task task = taskRuntime.task(taskID);
             UserTask userTask = (UserTask)repositoryService.getBpmnModel(task.getProcessDefinitionId())
                     .getFlowElement(task.getFormKey());
+/*  ------------------------------------------------------------------------------
+            FormProperty_0ueitp2-_!类型-_!名称-_!默认值-_!是否参数
+            例子：
+            FormProperty_0lovri0-_!string-_!姓名-_!请输入姓名-_!f
+            FormProperty_1iu6onu-_!int-_!年龄-_!请输入年龄-_!s
+
+            默认值：无、字符常量、FormProperty_开头定义过的控件ID
+            是否参数：f为不是参数，s是字符，t是时间(不需要int，因为这里int等价于string)
+            注：类型是可以获取到的，但是为了统一配置原则，都配置到
+            */
+
+            //注意!!!!!!!!:表单Key必须要任务编号一模一样，因为参数需要任务key，但是无法获取，只能获取表单key“task.getFormKey()”当做任务key
+
+
 
             //=========构建表单历史数据字典=========
             Map<String,String> controlFormData = new HashMap<String,String>();
@@ -172,7 +187,12 @@ public class TaskController {
                 map.put("id",props[0]);
                 map.put("controlType",props[1]);
                 map.put("controlLable",props[2]);
-                
+
+
+
+                //这里的代码意思是
+                //如果流程图的当前task想拿到该实例之前的某一个task的表单数据，就在当前task的表单id里的默认值里做文章
+                //在默认值的区间内写依赖的某一个task的 那个控件id。
                 //map.put("controlDefvalue",props[3]);
                 if(props[3].startsWith("FormProperty_")){
                     if(controlFormData.containsKey(props[3])){
@@ -207,6 +227,7 @@ public class TaskController {
     }
 
     //动态表单提交
+    //前端传过来的数据，后端做处理
     @PostMapping (value = "formDataSave")
     public AjaxResponse formDataSave(@RequestParam("taskID") String taskID,
                                      @RequestParam("formDataString") String formDataString){
@@ -235,6 +256,8 @@ public class TaskController {
                 hashMap.put("Control_VALUE_", props[1]);
                 hashMap.put("Control_PARAM_", props[2]);
 
+                //formData:控件id-_!控件值-_!是否参数!_!控件id-_!控件值-_!是否参数
+                //FormProperty_0lovri0-_!不是参数-_!f!_!FormProperty_1iu6onu-_!数字参数-_!s
 
                 switch (props[2]){
                     case "f":
