@@ -149,13 +149,14 @@ public class TaskController {
             UserTask userTask = (UserTask)repositoryService.getBpmnModel(task.getProcessDefinitionId())
                     .getFlowElement(task.getFormKey());
 /*  ------------------------------------------------------------------------------
-            FormProperty_0ueitp2-_!类型-_!名称-_!默认值-_!是否参数
+            FormProperty_id-_!类型-_!名称-_!默认值-_!是否参数
             例子：
             FormProperty_0lovri0-_!string-_!姓名-_!请输入姓名-_!f
             FormProperty_1iu6onu-_!int-_!年龄-_!请输入年龄-_!s
 
             默认值：无、字符常量、FormProperty_开头定义过的控件ID
             是否参数：f为不是参数，s是字符，t是时间(不需要int，因为这里int等价于string)
+                    (是否参数的意思是是否插参数到整个processInstance里面，给UEL判断表达式使用)
             注：类型是可以获取到的，但是为了统一配置原则，都配置到
             */
 
@@ -259,6 +260,8 @@ public class TaskController {
                 //formData:控件id-_!控件值-_!是否参数!_!控件id-_!控件值-_!是否参数
                 //FormProperty_0lovri0-_!不是参数-_!f!_!FormProperty_1iu6onu-_!数字参数-_!s
 
+                //如果是参数的话,就在complete 这个task的时候加上 {control_id : value} 的kv值，可供UEL表达式判断时动态赋值
+                //例如一个排他网关的UEL条件是 {FormProperty_2134M > 18}这时就可以把value插进去。
                 switch (props[2]){
                     case "f":
                         break;
